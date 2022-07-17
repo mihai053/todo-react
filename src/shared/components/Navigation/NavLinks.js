@@ -1,6 +1,6 @@
 import React from 'react';
 import classes from './NavLinks.module.css';
-import { NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 // fiecare va fi randat later dupa state
 
@@ -8,18 +8,16 @@ const NavLinks = (props) => {
   return (
     <ul className={classes['nav-links']}>
       <li>
-        <NavLink to='/' exact>
-          All users
-        </NavLink>
+        <Link to='/'>All users</Link>
       </li>
       <li>
-        <NavLink to='/1/todos'>My todos</NavLink>
+        <Link to='/1/todos'>My todos</Link>
       </li>
       <li>
-        <NavLink to='/todos/new'>Add todo</NavLink>
+        <Link to='/todos/new'>Add todo</Link>
       </li>
       <li>
-        <NavLink to='/auth'>Authatnticate</NavLink>
+        <Link to='/auth'>Authatnticate</Link>
       </li>
     </ul>
   );
