@@ -8,40 +8,46 @@ import MainNavigation from './shared/components/Navigation/MainNavigation';
 import UserTodos from './lists/pages/UserTodos';
 import UpdateTodo from './lists/pages/UpdateTodo';
 import Auth from './user/pages/Auth';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { authActions } from './shared/store/auth-slice';
 
-let logoutTimer;
+// let logoutTimer;
 
 const App = () => {
   // redux state from store
   const dispatch = useDispatch();
-  const token = useSelector((state) => state.auth.token); // state-ul din redux
+  // const token = useSelector((state) => state.auth.token); // state-ul din redux
+  // const tokenExpirationDate = useSelector(
+  //   (state) => state.auth.tokenExpirationDateGlobal
+  // );
 
-  //login is persistent with a token
+  // useEffect(() => {
+  //   if (token && tokenExpirationDate) {
+  //     const remainingTime =
+  //       tokenExpirationDate.getTime() - new Date().getTime();
+  //     logoutTimer = setTimeout(dispatch(authActions.logout()), remainingTime);
+  //   } else {
+  //     clearTimeout(logoutTimer);
+  //   }
+  // }, [token, dispatch, tokenExpirationDate]);
+
   useEffect(() => {
     const storedData = JSON.parse(localStorage.getItem('userData'));
 
     if (
       storedData &&
-      storedData.token &&
-      new Date(storedData.expiration) > new Date()
+      storedData.token
+      // && new Date(storedData.expiration) > new Date()
     ) {
       dispatch(
         authActions.login({
           userId: storedData.userId,
           token: storedData.token,
-          expirationDate: new Date(storedData.expiration),
+          // expirationDate: new Date(storedData.expiration),
         })
       );
     }
-  }, [dispatch]); //will only run once when the components mounts
-
-  useEffect(() => {
-    if (token) {
-      setTimeout(dispatch(authActions.logout()));
-    }
-  }, [token, dispatch]);
+  }, [dispatch]);
 
   return (
     <Fragment>
