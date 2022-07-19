@@ -3,14 +3,14 @@ import classes from './TodoList.module.css';
 
 import Card from '../../shared/components/UIElements/Card';
 import TodoItem from './TodoItem';
-
+import Button from '../../shared/components/FormElements/Button';
 const TodoList = (props) => {
   if (props.items.length === 0) {
     return (
       <div className={`${classes['todo-list']} center`}>
         <Card>
           <h2>No todos found. Maybe create one?</h2>
-          <button>Share todo</button>
+          <Button to='places/new'>Share todo</Button>
         </Card>
       </div>
     );
@@ -18,7 +18,17 @@ const TodoList = (props) => {
   return (
     <ul className={classes['todo-list']}>
       {props.items.map((todo) => {
-        <TodoItem key={todo.id} id={todo.id} />;
+        return (
+          <TodoItem
+            key={todo.id}
+            id={todo.id}
+            title={todo.title}
+            description={todo.description}
+            address={todo.address}
+            cretorId={todo.creatorId}
+            onDelete={props.onDeleteTodo}
+          />
+        );
       })}
     </ul>
   );

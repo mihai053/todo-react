@@ -24,7 +24,7 @@ const UsersList = (props) => {
             id={user.id}
             name={user.name}
             email={user.email}
-            todosCount={user.todos}
+            todosCount={user.todos.length}
           />
         );
       })}
